@@ -6,13 +6,14 @@
 #    By: igenial <igenial@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 19:34:20 by igenial           #+#    #+#              #
-#    Updated: 2023/09/27 14:07:02 by igenial          ###   ########.fr        #
+#    Updated: 2023/09/27 18:39:18 by igenial          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME			=
-MANDATORY		=
+NAME_CLIENT		=	client
+NAME_SERVER		= 	server
+MANDATORY		=	client.c
 BONUS			=
 HEADER			=
 LIBFT			=
@@ -23,10 +24,10 @@ CFLAGS			=
 VALGRIND		=	algrind --leak-check=full --show-leak-kinds=all --track-fds=yes
 GDB				=	gdb --tui --args
 
-all: $(NAME)
+all: $(NAME_CLIENT)
 
-$(NAME): $(MANDATORY_FILES)	$(LBFT)
-	$(CC) $(CFLAGS) $(MANDATORY_FILES) $(LIBFT) -o $(NAME)
+$(NAME_CLIENT): $(MANDATORY_FILES)	$(LBFT)
+	$(CC) $(CFLAGS) $(MANDATORY_FILES) $(LIBFT) -o $(NAME_CLIENT)
 
 $(LIBFT):
 	make -C ./libft
@@ -38,14 +39,14 @@ clean:
 	rm -f $(MANDATORY_FILES)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME_CLIENT)
 
 re: fclean all
 
 valgrind: all
-	$(VALGRIND) ./$(NAME)
+	$(VALGRIND) ./$(NAME_CLIENT)
 
 gdb: all
-	$(GDB) ./$(NAME)
+	$(GDB) ./$(NAME_CLIENT)
 
 .PHONY:	all clean fclean re 
