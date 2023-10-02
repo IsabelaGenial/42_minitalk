@@ -19,13 +19,15 @@ C_MANDATORY		=	client.c
 C_FILES			=	$(C_MANDATORY:%.c=%.o)
 S_BONUS			=	server_bonus.c
 c_BONUS			=	client_bonus.c
+LIBFT			= 	libft.a
 HEADER			= 	mini_talk.h
-HEADER_BONUS		=	mini_talk_bonus.h
+HEADER_LIB		=	libfstonk/libft.h
+HEADER_BONUS	=	mini_talk_bonus.h
 BONUS_FILES		=
-CC			=	cc
+CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
 VALGRIND		=	algrind --leak-check=full --show-leak-kinds=all --track-fds=yes
-GDB			=	gdb --tui --args
+GDB				=	gdb --tui --args
 
 all: $(NAME_SERVER) $(NAME_CLIENT)
 
@@ -33,7 +35,7 @@ $(NAME_SERVER): $(S_FILES)	$(LBFT)
 	$(CC) $(CFLAGS) $(S_FILES) $(LIBFT) -o $(NAME_SERVER)
 
 $(S_FILES): $(S_MANDATORY)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -I $(HEADER_LIB) -c $< -o $@
 
 $(NAME_CLIENT): $(C_FILES) $(LBFT)
 	$(CC) $(CFLAGS) $(C_FILES) $(LIBFT) -o $(NAME_CLIENT)

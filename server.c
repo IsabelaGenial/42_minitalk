@@ -6,19 +6,17 @@
 /*   By: igenial <igenial@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 17:58:26 by igenial           #+#    #+#             */
-/*   Updated: 2023/09/27 18:02:54 by igenial          ###   ########.fr       */
+/*   Updated: 2023/10/01 19:25:06 by isabela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <sys/types.h>
-#include <unistd.h>
+#include "mini_talk.h"
 
 int main ()
 {
 	int pid;
 
 	pid = getpid();
-	printf("pid %i\n", pid);
+	ft_printf("pid %i\n", pid);
 	return (0);
 }
