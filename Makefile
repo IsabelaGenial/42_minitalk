@@ -19,9 +19,8 @@ C_MANDATORY		=	client.c
 C_FILES			=	$(C_MANDATORY:%.c=%.o)
 S_BONUS			=	server_bonus.c
 c_BONUS			=	client_bonus.c
-LIBFT			= 	libft.a
 HEADER			= 	mini_talk.h
-HEADER_LIB		=	libfstonk/libft.h
+LIB				=	libfstonk/libft.a
 HEADER_BONUS	=	mini_talk_bonus.h
 BONUS_FILES		=
 CC				=	cc
@@ -29,16 +28,18 @@ CFLAGS			=	-Wall -Wextra -Werror
 VALGRIND		=	algrind --leak-check=full --show-leak-kinds=all --track-fds=yes
 GDB				=	gdb --tui --args
 
-all: $(NAME_SERVER) $(NAME_CLIENT)
+all: libft
+	make $(NAME_SERVER)
+	make $(NAME_CLIENT)
 
-$(NAME_SERVER): $(S_FILES)	$(LBFT)
-	$(CC) $(CFLAGS) $(S_FILES) $(LIBFT) -o $(NAME_SERVER)
+$(NAME_SERVER): $(S_FILES)
+	$(CC) $(CFLAGS) -I. $(S_FILES) $(LIB) -o $(NAME_SERVER)
 
 $(S_FILES): $(S_MANDATORY)
-	$(CC) $(CFLAGS) -I $(HEADER_LIB) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME_CLIENT): $(C_FILES) $(LBFT)
-	$(CC) $(CFLAGS) $(C_FILES) $(LIBFT) -o $(NAME_CLIENT)
+$(NAME_CLIENT): $(C_FILES)
+	$(CC) $(CFLAGS) $(C_FILES) $(LIB) -o $(NAME_CLIENT)
 
 $(C_FILES): $(C_MANDATORY)
 	$(CC) $(CFLAGS)  -c $< -o $@
@@ -47,7 +48,7 @@ bonus:
 	@make C_FILES="$(C_BONUS)" S_FILES="$(S_BONUS)"
 
 libft:
-	make  -C libfstonk
+	make -C libfstonk
 
 clean:
 	rm -f $(S_FILES) $(C_FILES) 

@@ -12,11 +12,20 @@
 
 #include "mini_talk.h"
 
+
+void handle_signal (int signal)
+{
+	ft_printf("%d", signal);
+}
+
 int main ()
 {
-	int pid;
+	int			pid;
 
 	pid = getpid();
+	signal(SIGUSR1, handle_signal);
 	ft_printf("pid %i\n", pid);
+	while (1)
+		pause();
 	return (0);
 }
