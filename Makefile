@@ -25,7 +25,7 @@ HEADER_BONUS	=	mini_talk_bonus.h
 BONUS_FILES		=
 CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
-VALGRIND		=	algrind --leak-check=full --show-leak-kinds=all --track-fds=yes
+VALGRIND		=	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes
 GDB				=	gdb --tui --args
 
 all: libft
