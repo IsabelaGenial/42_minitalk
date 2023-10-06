@@ -16,7 +16,8 @@ int send_bit(int pid, char *str);
 void sig_handler(int signum);
 int	ft_str_isdigit(char *c);
 
-int main (int argc, char **argv) {
+int main (int argc, char **argv)
+{
     int num;
 
     if (argc != 3 || !ft_str_isdigit(argv[1]))
@@ -29,35 +30,38 @@ int main (int argc, char **argv) {
     signal(SIGUSR2, sig_handler);
 
     if(send_bit(num, argv[2]))
+    {
         ft_printf("ERROR: signal no sent");
-	while (1)
-        pause();
+        exit(EXIT_FAILURE);
+    }
+	
 }
 
 int send_bit(int pid, char *str)
 {
-    static char *message = 0;
-    static int bit = -1;
+    char message;
+    int bit;
 
-    message = ft_strdup(str);
-    if (!message)
-        return (1);
-    while (message[++bit/8])
+    while (*str)
     {
-        if (message[bit / 8] & (0x80 >> (bit % 8)))
+        message = *str;
+        bit = 7;
+        while (bit >= 0)
         {
-            if (kill(pid, SIGUSR2) == -1)
+            if ((message >> bit) & 1)
             {
-                free(message)
-                return (1);
+                if(kill(pid, SIGUSR2) == -1)
+                    return(1);
             }
-        } else if (kill(pid, SIGUSR1) == -1)
-        {
-            free(message)
-            return (1);
+            else
+            {
+               if (kill(pid, SIGUSR1) == -1)
+                   return(1);
+            }
+            bit--;
         }
+        str++;
     }
-    free(message);
     return (0);
 }
 
