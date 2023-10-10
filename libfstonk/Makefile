@@ -22,7 +22,7 @@ SRCS_MANDATORY	=	ft_isalnum.c	ft_isdigit.c	ft_memset.c	ft_strlen.c	\
 SRCS_BONUS	=	ft_lstadd_back_bonus.c	ft_lstdelone_bonus.c	ft_lstnew_bonus.c	\
 				ft_lstadd_front_bonus.c	ft_lstlast_bonus.c	ft_lstsize_bonus.c	\
 				ft_lstclear_bonus.c	ft_lstiter_bonus.c	ft_lstmap_bonus.c
-FLAGS		= 	-Wall -Wextra -Werror -g3
+FLAGS		= 	-g3 -Wall -Wextra -Werror
 HEADER		=	libft.h
 FILES		=	$(SRCS_MANDATORY:%.c=%.o)
 BONUS_FILES	=	$(SRCS_BONUS:%.c=%.o)

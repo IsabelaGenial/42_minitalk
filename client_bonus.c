@@ -39,7 +39,6 @@ int	main (int argc, char **argv)
 	sigaction(SIGUSR1, &s_sig, NULL);
 	sigaction(SIGUSR2, &s_sig, NULL);
 	send_bit(pid, argv[2]);
-	g_signal = 0;
 }
 
 int	send_bit(int pid, char *str)
@@ -89,11 +88,28 @@ static int	ft_str_isdigit(char *c)
 void handler(int signum, siginfo_t *info, void *context)
 {
 	int pid;
+	int bit;
 
 	(void) context;
 	pid = info->si_pid;
-	if (signum == SIGUSR1 || signum == SIGUSR2)
+	bit = 0x0;
+	if (signum == SIGUSR1)
+	{
+		write(1, "1", 1);
 		g_signal = 1;
+		bit++;
+	}
+	else if (signum == SIGUSR2)
+	{
+		write(1, "0", 1);
+		g_signal = 1;
+		bit++;
+	}
+	if (bit == 8)
+	{
+		write(1, " ", 1);
+		bit = 0;
+	}
 	else
 		exit(EXIT_FAILURE);
 }

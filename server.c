@@ -39,13 +39,10 @@ void handler(int signum, siginfo_t *info, void *context)
 {
 	static unsigned char	c = 0x0;
 	static int				bit = 0;
-	int						pid;
 
-	(void)context;
-	if(info->si_pid)
-		pid = info->si_pid;
+	(void)context;;
 	if (signum == SIGUSR1)
-			c |= 0x1;
+		c |= 0x1;
 	if (++bit == 8)
 	{
 		write(1, &c, 1);
@@ -53,8 +50,8 @@ void handler(int signum, siginfo_t *info, void *context)
 		bit = 0;
 	}
 	c <<= 0x1;
-//	if (signum == SIGUSR1)
-//		kill(info->si_pid, SIGUSR1);
-//	else
-//		kill(info->si_pid, SIGUSR2);
+	if (signum == SIGUSR1)
+		kill(info->si_pid, SIGUSR1);
+	else if (signum == SIGUSR2)
+		kill(info->si_pid, SIGUSR2);
 }

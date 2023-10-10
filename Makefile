@@ -22,9 +22,10 @@ c_BONUS			=	client_bonus.c
 HEADER			= 	mini_talk.h
 LIB				=	libfstonk/libft.a
 HEADER_BONUS	=	mini_talk_bonus.h
-BONUS_FILES		=
-CC				=	cc -g
-CFLAGS			=	-Wall -Wextra -Werror 
+C_BONUS	 		= 	client_bonus.c
+S_BONUS			=	server_bonus.c
+CC				=	cc
+CFLAGS			=	-g3 -Wall -Wextra -Werror
 VALGRIND		=	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes
 GDB				=	gdb --tui --args
 
