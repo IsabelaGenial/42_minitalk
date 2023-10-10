@@ -47,7 +47,7 @@ $(C_FILES): $(C_MANDATORY)
 
 bonus:
 	@make fclean
-	@make C_FILES="$(C_BONUS)" S_FILES="$(S_BONUS)"
+	@make C_MANDATORY="$(C_BONUS)" S_MANDATORY="$(S_BONUS)"
 
 libft:
 	make -C libfstonk

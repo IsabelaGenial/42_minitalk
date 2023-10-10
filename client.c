@@ -6,7 +6,7 @@
 /*   By: igenial <igenial@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 11:23:05 by igenial           #+#    #+#             */
-/*   Updated: 2023/10/10 00:31:25 by igenial          ###   ########.fr       */
+/*   Updated: 2023/10/10 17:40:42 by igenial          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ int	main(int argc, char **argv)
 	struct sigaction	s_sig;
 	sigset_t			sigset;
 
-	if (argc != 3 || !ft_str_isdigit(argv[1]))
+	pid = ft_atoi(argv[1]);
+	if (argc != 3 || !ft_str_isdigit(argv[1]) || pid < 0)
 	{
-		ft_printf ("ERROR: argument number");
+		ft_printf ("ERROR: input argument\n");
+		ft_printf ("EXPECTED: <./client [positive number] [message]>\n");
 		exit (EXIT_FAILURE);
 	}
-	pid = ft_atoi(argv[1]);
+	sigemptyset(&sigset);
 	sigaddset(&sigset, SIGUSR1);
 	sigaddset(&sigset, SIGUSR2);
 	s_sig.sa_handler = NULL;
