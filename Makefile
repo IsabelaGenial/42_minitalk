@@ -46,6 +46,7 @@ $(C_FILES): $(C_MANDATORY)
 	$(CC) $(CFLAGS)  -c $< -o $@
 
 bonus:
+	@make fclean
 	@make C_FILES="$(C_BONUS)" S_FILES="$(S_BONUS)"
 
 libft:

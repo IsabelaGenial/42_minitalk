@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: igenial <igenial@student.42sp.org.br>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/10 00:50:46 by igenial           #+#    #+#             */
+/*   Updated: 2023/10/10 00:53:00 by igenial          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mini_talk.h"
 
-void handler(int signum, siginfo_t *info, void *context);
+void	handler(int signum, siginfo_t *info, void *context);
 
-int main (void)
+int	main(void)
 {
 	int					pid;
 	struct sigaction	s_sig;
@@ -23,12 +35,12 @@ int main (void)
 		pause();
 }
 
-void handler(int signum, siginfo_t *info, void *context)
+void	handler(int signum, siginfo_t *info, void *context)
 {
 	static unsigned char	c = 0x0;
 	static int				bit = 0;
 
-	(void)context;;
+	(void)context;
 	if (signum == SIGUSR1)
 		c |= 0x1;
 	if (++bit == 8)
